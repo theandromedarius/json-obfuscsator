@@ -13,14 +13,22 @@
     <div class="container">
         <div class="horizontal-layout">
             <h1>Input</h1>
-            <textarea id="textInput" placeholder="Enter text..." rows="10"></textarea>
-            <div class="custom-button" id="submitButton">
-                <span class="custom-button-icon">Convert</span>
+            <div class="input-wrapper">
+                <textarea id="textInput" placeholder="Enter text..." rows="10"></textarea>
+                <button class="clear-button" id="clearButton">&#128465;</button>
+                <button class="paste-button" id="pasteButton">Paste</button>
+                <div class="custom-button" id="submitButton">
+                    <span class="custom-button-icon">Convert</span>
+                </div>
             </div>
         </div>
         <div id="outputContainer">
             <h1>Output</h1>
-            <textarea id="outputText" placeholder="Output text..." rows="10" readonly></textarea>
+            <div class="output-wrapper">
+                <textarea id="outputText" placeholder="Output text..." rows="10" readonly></textarea>
+                <button class="copy-button" id="copyButton">Copy</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -91,6 +91,47 @@ textarea {
     font-size: 32px;
     font-weight: bold;
     color: #ffa500;
-    margin-top: 12px; /* Mengurangi margin-top */
-    margin-bottom: 12px; /* Menambahkan margin-bottom */
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+/* Output wrapper styles */
+.output-wrapper, .input-wrapper {
+    position: relative;
+}
+
+/* Copy/Paste button styles */
+.copy-button, .paste-button, .clear-button {
+    position: absolute;
+    top: -34px;
+    right: 0;
+    padding: 6px 12px;
+    background-color: #007acc;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.copy-button:hover, .paste-button:hover, .clear-button:hover {
+    background-color: #005bb5;
+}
+
+/* Clear button styles */
+.clear-button {
+    position: absolute;
+    right: 80px;
+    padding: 2px 12px;
+    background-color: #d9534f;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.clear-button:hover {
+    background-color: #c9302c;
 }
