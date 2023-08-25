@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Andromedarius: Json Obfuscator</title>
+</head>
+<body>
+<div class="outer-container">
+    <div class="json-obfuscator-text">Json Obfuscator</div>
+    <div class="container">
+        <div class="horizontal-layout">
+            <h1>Input</h1>
+            <textarea id="textInput" placeholder="Enter text..." rows="10"></textarea>
+            <div class="custom-button" id="submitButton">
+                <span class="custom-button-icon">Convert</span>
+            </div>
+        </div>
+        <div id="outputContainer">
+            <h1>Output</h1>
+            <textarea id="outputText" placeholder="Output text..." rows="10" readonly></textarea>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
