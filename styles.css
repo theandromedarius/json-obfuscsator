@@ -91,6 +91,6 @@ textarea {
     font-size: 32px;
     font-weight: bold;
     color: #ffa500;
-    margin-top: 12px; /* Mengurangi margin-top */
+    margin-top: 0px; /* Mengurangi margin-top */
     margin-bottom: 12px; /* Menambahkan margin-bottom */
 }
