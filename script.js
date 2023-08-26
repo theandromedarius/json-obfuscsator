@@ -7,7 +7,7 @@ const textInput = q('#textInput'),
   clearButton = q('#clearButton'),
   submitButton = q('#submitButton'),
   fileInput = q('#fileInput'),
-  exportButton = q('#exportButton');
+  exportButton = q('#exportButton'); // Tambahkan exportButton ke dalam pemilihan
 
 submitButton.addEventListener('click', () => {
   copyButton.innerHTML = 'Copy';
@@ -33,15 +33,7 @@ clearButton.addEventListener('click', () => {
 fileInput.addEventListener('change', handleFileSelect);
 
 exportButton.addEventListener('click', () => {
-  const outputTextContent = outputText.value;
-  const blob = new Blob([outputTextContent], { type: 'text/plain' });
-
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'output.txt';
-  a.click();
-
-  URL.revokeObjectURL(a.href);
+  exportOutputFile();
 });
 
 function handleFileSelect(event) {
@@ -88,4 +80,28 @@ function resetPage() {
   outputText.textContent = '';
   copyButton.innerHTML = 'Copy';
   copyButton.disabled = false;
+}
+
+function exportOutputFile() {
+  if (outputText.value) {
+    const fileName = fileInput.files[0] ? fileInput.files[0].name.split('.')[0] : 'output';
+    const fileType = getFileType(fileInput.files[0] ? fileInput.files[0].name : '');
+
+    const blob = new Blob([outputText.value], { type: `application/${fileType}` });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${fileName}.${fileType}`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+}
+
+function getFileType(fileName) {
+  if (fileName) {
+    const extension = fileName.split('.').pop();
+    return extension;
+  }
+  return 'json';
 }
