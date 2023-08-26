@@ -8,30 +8,31 @@
     <title>Andromedarius: Json Obfuscator</title>
 </head>
 <body>
-<div class="outer-container">
-    <div class="json-obfuscator-text">Json Obfuscator</div>
-    <div class="container">
-        <div class="horizontal-layout">
-            <h1>Input</h1>
-            <div class="input-wrapper">
-                <textarea id="textInput" placeholder="Enter text..." rows="10"></textarea>
-                <button class="clear-button" id="clearButton">&#128465;</button>
-                <button class="paste-button" id="pasteButton">Paste</button>
-                <div class="custom-button" id="submitButton">
-                    <span class="custom-button-icon">Convert</span>
+    <div class="outer-container">
+        <div class="json-obfuscator-text">Json Obfuscator</div>
+        <div class="container">
+            <div class="horizontal-layout">
+                <h1>Input</h1>
+                <div class="input-wrapper">
+                    <textarea id="textInput" placeholder="Enter text..." rows="10"></textarea>
+                    <input type="file" id="fileInput" accept=".txt,.json" class="import-button"/>
+                    <button class="clear-button" id="clearButton">&#128465;</button>
+                    <button class="paste-button" id="pasteButton">Paste</button>
+                    <div class="custom-button" id="submitButton">
+                        <span class="custom-button-icon">Convert</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="outputContainer">
-            <h1>Output</h1>
-            <div class="output-wrapper">
-                <textarea id="outputText" placeholder="Output text..." rows="10" readonly></textarea>
-                <button class="copy-button" id="copyButton">Copy</button>
+            <div id="outputContainer">
+                <h1>Output</h1>
+                <div class="output-wrapper">
+                    <textarea id="outputText" placeholder="Output text..." rows="10" readonly></textarea>
+                    <button class="copy-button" id="copyButton">Copy</button>
+                    <button class="export-button" id="exportButton">Export</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

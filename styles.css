@@ -25,6 +25,7 @@ body {
     position: relative;
 }
 
+/* Container::before styles */
 .container::before {
     content: '';
     position: absolute;
@@ -76,16 +77,18 @@ textarea {
     margin-bottom: 8px;
 }
 
+/* Custom-button:hover styles */
 .custom-button:hover {
     transform: scale(1.02);
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Custom-button:active styles */
 .custom-button:active {
     transform: translateY(2px);
 }
 
-/* Json Obfuscator text */
+/* Json Obfuscator text styles */
 .json-obfuscator-text {
     text-align: center;
     font-size: 32px;
@@ -95,7 +98,7 @@ textarea {
     margin-bottom: 12px;
 }
 
-/* Output wrapper styles */
+/* Output wrapper and input-wrapper styles */
 .output-wrapper, .input-wrapper {
     position: relative;
 }
@@ -114,11 +117,12 @@ textarea {
     transition: background-color 0.3s;
 }
 
+/* Copy-button:hover, paste-button:hover, clear-button:hover styles */
 .copy-button:hover, .paste-button:hover, .clear-button:hover {
     background-color: #005bb5;
 }
 
-/* Clear button styles */
+/* Clear-button styles */
 .clear-button {
     position: absolute;
     right: 80px;
@@ -132,6 +136,46 @@ textarea {
     transition: background-color 0.3s;
 }
 
+/* Clear-button:hover styles */
 .clear-button:hover {
     background-color: #c9302c;
+}
+
+/* Import button styles */
+.import-button {
+    top: -34px;
+    position: absolute;
+    padding: 2px 2px; /* Mengembalikan padding yang lebih besar */
+    right: 150px; /* Mengatur jarak dari tombol Clear */
+    background-color: #fff;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Import-button:hover styles */
+.import-button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Export button styles */
+.export-button {
+    top: -34px;
+    position: absolute;
+    padding: 6px 12px; /* Mengembalikan padding yang lebih besar */
+    right: 80px; /* Mengatur jarak dari tombol Copy */
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 6px; /* Menggunakan border-radius yang lebih besar */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Export-button:hover styles */
+.export-button:hover {
+    background-color: #f0f0f0;
 }

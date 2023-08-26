@@ -1,74 +1,91 @@
-const textInput = document.getElementById('textInput');
-const outputText = document.getElementById('outputText');
-const outputTextbox = document.getElementById('outputTextbox');
-const submitButton = document.getElementById('submitButton');
-const copyButton = document.getElementById('copyButton');
-const pasteButton = document.getElementById('pasteButton');
-const clearButton = document.getElementById('clearButton');
+const q = document.querySelector.bind(document);
+
+const textInput = q('#textInput'),
+  outputText = q('#outputText'),
+  copyButton = q('#copyButton'),
+  pasteButton = q('#pasteButton'),
+  clearButton = q('#clearButton'),
+  submitButton = q('#submitButton'),
+  fileInput = q('#fileInput'),
+  exportButton = q('#exportButton');
 
 submitButton.addEventListener('click', () => {
-    resetCopyButton();
-    const inputText = textInput.value;
-    const filteredText = filterText(inputText);
-    outputText.textContent = filteredText;
-    outputTextbox.value = filteredText;
+  copyButton.innerHTML = 'Copy';
+  copyButton.disabled = false;
+  outputText.textContent = filterText(textInput.value);
 });
 
 copyButton.addEventListener('click', () => {
-    const outputTextarea = document.getElementById('outputText');
-    outputTextarea.select();
-    document.execCommand('copy');
-
-    copyButton.innerHTML = '&#10003; Copied';
-    copyButton.disabled = true;
+  outputText.select();
+  document.execCommand('copy');
+  copyButton.innerHTML = '&#10003; Copied';
+  copyButton.disabled = true;
 });
 
-pasteButton.addEventListener('click', () => {
-    navigator.clipboard.readText().then(pastedText => {
-        textInput.value = pastedText;
-    });
+pasteButton.addEventListener('click', async () => {
+  textInput.value = await navigator.clipboard.readText();
 });
 
 clearButton.addEventListener('click', () => {
-    location.reload();
+  resetPage();
 });
 
-function resetCopyButton() {
-    copyButton.innerHTML = 'Copy';
-    copyButton.disabled = false;
+fileInput.addEventListener('change', handleFileSelect);
+
+exportButton.addEventListener('click', () => {
+  const outputTextContent = outputText.value;
+  const blob = new Blob([outputTextContent], { type: 'text/plain' });
+
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'output.txt';
+  a.click();
+
+  URL.revokeObjectURL(a.href);
+});
+
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      textInput.value = e.target.result;
+    };
+    reader.readAsText(file);
+  }
 }
 
 function filterText(inputText) {
-    const lines = inputText.split('\n');
-    const filteredLines = lines.map(line => {
-        if (line.trim().startsWith('//')) {
-            return line;
-        }
-        if (line.includes('/*') && !line.includes('*/')) {
-            return line;
-        }
-        if (/^[$#][(]/.test(line) || /^[[(]/.test(line)) {
-            return line;
-        }
-        let filteredLine = '';
-        const lowerCaseLine = line.toLowerCase();
-        if (lowerCaseLine.includes('true') || lowerCaseLine.includes('false')) {
-            return line;
-        }
-        for (let i = 0; i < line.length; i++) {
-            const char = line[i];
-            if (/[\{\}\[\]\(\):;'",.\'\/]/.test(char) || char === ' ') {
-                filteredLine += char;
-            } else {
-                const charCode = char.charCodeAt(0);
-                if (charCode >= 65 && charCode <= 90 || charCode >= 97 && charCode <= 122) {
-                    filteredLine += '\\u' + charCode.toString(16).padStart(4, '0');
-                } else {
-                    filteredLine += char;
-                }
-            }
-        }
-        return filteredLine;
-    });
-    return filteredLines.join('\n');
+  return inputText
+    .split('\n')
+    .map((line) =>
+      line.trim().startsWith('//') ||
+      (line.includes('/*') && !line.includes('*/')) ||
+      /^[$#][(]/.test(line) ||
+      /^[[(]/.test(line)
+        ? line
+        : line.toLowerCase().includes('true') ||
+          line.toLowerCase().includes('false')
+        ? line
+        : [...line]
+            .map((char) =>
+              /[\{\}\[\]\(\):;'",.\'\/ ]/.test(char)
+                ? char
+                : ((charCode) =>
+                    (charCode >= 65 && charCode <= 90) ||
+                    (charCode >= 97 && charCode <= 122)
+                      ? '\\u' + charCode.toString(16).padStart(4, '0')
+                      : char
+                  )(char.charCodeAt(0))
+            )
+            .join('')
+    )
+    .join('\n');
+}
+
+function resetPage() {
+  textInput.value = '';
+  outputText.textContent = '';
+  copyButton.innerHTML = 'Copy';
+  copyButton.disabled = false;
 }
